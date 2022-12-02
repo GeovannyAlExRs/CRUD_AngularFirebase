@@ -1,1 +1,53 @@
-<p>employment-create works!</p>
+<div class="container m-4">
+    <div class="card text-center">
+        <div class="card-body">
+            <span class="h5">Registro de empleados</span>
+        </div>
+
+        <div class="container">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationServer01">Apellidos</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Last name" required>
+                        <div class="valid-feedback">Excelente!</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationServer02">Nombres</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="First name" required>
+                        <div class="valid-feedback">Excelente!</div>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationServer03">Direccion</label>
+                        <input type="text" class="form-control" id="validationServer03" placeholder="Address" aria-describedby="validationServer03Feedback" required>
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                        Ingresar Direccion
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Tel/Cel</label>
+                        <input type="text" class="form-control" id="validationServer04" placeholder="Phone" aria-describedby="validationServer04Feedback" required>
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                        Ingresar numero celular
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer05">Fecha Nac.</label>
+                        <input type="date" class="form-control" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                        <div id="validationServer05Feedback" class="invalid-feedback">
+                        Fecha incorrecta
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group text-right pr-2">
+                        <button routerLink="/list-employments" class="btn btn-light mr-3" type="text">Volver</button>
+                        <button class="btn btn-dark" type="submit">Guardar</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
