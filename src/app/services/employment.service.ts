@@ -14,11 +14,19 @@ export class EmploymentService {
     return this.firestore.collection('employment').add(employment);
   }
 
-  getEmployment(): Observable<any> {
+  getEmployments(): Observable<any> {
     return this.firestore.collection('employment', ref => ref.orderBy('lastName', 'asc')).snapshotChanges();
   }
 
-  deleteEmployment(id: string): Promise<any>  {
+  deleteEmployment(id: string): Promise<any> {
     return this.firestore.collection('employment').doc(id).delete();
+  }
+
+  getEmploymentById(id: string): Observable<any> {
+    return this.firestore.collection('employment').doc(id).snapshotChanges();
+  }
+
+  updateEmployment(id: string, data: any): Promise<any> {
+    return this.firestore.collection('employment').doc(id).update(data);
   }
 }

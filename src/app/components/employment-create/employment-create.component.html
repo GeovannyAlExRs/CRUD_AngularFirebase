@@ -1,11 +1,11 @@
 <div class="container m-4">
     <div class="card text-center">
         <div class="card-body">
-            <span class="h5">Registro de empleados</span>
+            <span class="h5">{{titleForm}}</span>
         </div>
 
         <div class="container">
-            <form [formGroup]="formEmployment" (ngSubmit)="createEmployment()">
+            <form [formGroup]="formEmployment" (ngSubmit)="saveEmployment()">
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="validationServer01">Apellidos</label>

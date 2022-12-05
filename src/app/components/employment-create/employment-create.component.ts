@@ -15,6 +15,7 @@ export class EmploymentCreateComponent implements OnInit{
   submitted = false;
   loading = false;
   id: string | null;
+  titleForm = 'Registro de empleados';
 
   constructor(private fb: FormBuilder, private _employmentService: EmploymentService,
               private router: Router, private toastr: ToastrService, 
@@ -31,14 +32,24 @@ export class EmploymentCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getEmploymentId();
   }
 
-  createEmployment() {
+  saveEmployment() {
     this.submitted = true;
 
     if(this.formEmployment.invalid) {
       return;
     }
+
+    if(this.id == null) {
+      this.createEmployment();
+    } else {
+      this.updateEmployment(this.id);
+    }
+  }
+
+  createEmployment () {
 
     const employment: any = {
       lastName: this.formEmployment.value.lastName,
@@ -62,5 +73,47 @@ export class EmploymentCreateComponent implements OnInit{
       console.log(error)
       this.loading = false;
     });
+  }
+  
+  updateEmployment(idDoc: string) {
+    
+    const employment: any = {
+      lastName: this.formEmployment.value.lastName,
+      firstName: this.formEmployment.value.firstName,
+      address: this.formEmployment.value.address,
+      phone: this.formEmployment.value.phone,
+      birthDate: this.formEmployment.value.birthDate,
+      dateUpdate: new Date()
+    }
+
+    this.loading = true;
+
+    this._employmentService.updateEmployment(idDoc, employment).then(()=>{
+      this.toastr.info('Empleado '+ employment.firstName +' ' + employment.lastName + ' actualizado con exito!!!', 
+                        'Actualizar usuario',
+                        {positionClass: 'toast-bottom-right'});
+    this.loading = false;
+    this.router.navigate(['list-employments']);
+    })
+  }
+
+  getEmploymentId() {
+    this.titleForm = 'Editar empleado';
+    this.loading = true;
+    if(this.id != null) {
+      this._employmentService.getEmploymentById(this.id).subscribe(data => {
+        this.loading = false;
+        console.log(data.payload.data()['lastName']);
+        this.formEmployment.setValue({
+          lastName: data.payload.data()['lastName'],
+          firstName: data.payload.data()['firstName'],
+          address: data.payload.data()['address'],
+          phone: data.payload.data()['phone'],
+          birthDate: data.payload.data()['birthDate']
+        });
+      });
+    } else {
+      this.loading = false;
+    }
   }
 }

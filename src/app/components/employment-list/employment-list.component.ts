@@ -20,16 +20,19 @@ export class EmploymentListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.getEmployment();
+    this.getEmployments();
   }
   
-  getEmployment() {
-    this._employmentList.getEmployment().subscribe(data => {
+  getEmployments() {
+    this.loading = true;
+    
+    this._employmentList.getEmployments().subscribe(data => {
+      
       this.employments = [];
+      this.loading = false;
+
       data.forEach((element: any) => {
         /*console.log(element.payload.doc.data());*/
-        this.loading = false;
         this.employments.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
