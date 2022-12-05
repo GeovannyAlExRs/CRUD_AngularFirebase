@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmploymentService } from 'src/app/services/employment.service';
 
@@ -9,14 +9,16 @@ import { EmploymentService } from 'src/app/services/employment.service';
   templateUrl: './employment-create.component.html',
   styleUrls: ['./employment-create.component.css']
 })
-export class EmploymentCreateComponent  implements OnInit{
+export class EmploymentCreateComponent implements OnInit{
   
   formEmployment: FormGroup;
   submitted = false;
   loading = false;
+  id: string | null;
 
   constructor(private fb: FormBuilder, private _employmentService: EmploymentService,
-              private router: Router, private toastr: ToastrService) {
+              private router: Router, private toastr: ToastrService, 
+              private aRoute: ActivatedRoute) {
     this.formEmployment = this.fb.group({
       lastName: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -24,6 +26,8 @@ export class EmploymentCreateComponent  implements OnInit{
       phone: ['', Validators.required],
       birthDate: ['', Validators.required]
     })
+    this.id = this.aRoute.snapshot.paramMap.get('id');
+    console.log(this.id);
   }
 
   ngOnInit(): void {

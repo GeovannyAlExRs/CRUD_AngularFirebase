@@ -7,7 +7,8 @@ import { EmploymentCreateComponent } from './components/employment-create/employ
 const routes: Routes = [
   {path: '', component: EmploymentHomeComponent},
   {path: 'list-employments', component: EmploymentListComponent},
-  {path: 'create-employments', component: EmploymentCreateComponent},
+  {path: 'create-employment', component: EmploymentCreateComponent},
+  {path: 'edit-employment/:id', component: EmploymentCreateComponent},
   {path: '**', redirectTo: '', pathMatch:'full'}  
 ]; // sets up routes constant where you define your routes
 
