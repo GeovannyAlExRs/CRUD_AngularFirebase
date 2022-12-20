@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./employment-home.component.css']
 })
 export class EmploymentHomeComponent {
+  title = 'Registro de Empleados';
 
 }

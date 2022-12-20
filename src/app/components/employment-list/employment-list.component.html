@@ -20,35 +20,37 @@
         </div>
     </div>
 
-    <table *ngIf="employments.length > 0" class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Apellidos</th>
-                <th>Nombres</th>
-                <th>Tel/Cel</th>
-                <th>Direccion</th>
-                <th>Fec.Nacim.</th>
-                <th>Edad</th>
-                <th>Accion</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let employment of employments">
-                <td>{{employment.lastName}}</td>
-                <td>{{employment.firstName}}</td>
-                <td>{{employment.phone}}</td>
-                <td>{{employment.address}}</td>
-                <td>{{employment.birthDate}}</td>
-                <td>28</td>
-                <td>
-                <a [routerLink]="['/edit-employment/', employment.id]" class="btn btn-link btn-sm text-info" data-original-title="Editar">
-                    <i class="fas fa-edit"></i>
-                </a> 
-                <a (click)="deleteEmployment(employment.id)" class="btn btn-link btn-sm text-danger" data-original-title="Eliminar">
-                    <i class="fas fa-trash-alt"></i>
-                </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table *ngIf="employments.length > 0" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Tel/Cel</th>
+                    <th>Direccion</th>
+                    <th>Fec.Nacim.</th>
+                    <th>Edad</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employment of employments">
+                    <td>{{employment.lastName}}</td>
+                    <td>{{employment.firstName}}</td>
+                    <td>{{employment.phone}}</td>
+                    <td>{{employment.address}}</td>
+                    <td>{{employment.birthDate}}</td>
+                    <td>{{age[employment]}}</td>
+                    <td>
+                    <a [routerLink]="['/edit-employment/', employment.id]" class="btn btn-link btn-sm text-info" data-original-title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a> 
+                    <a (click)="deleteEmployment(employment.id)" class="btn btn-link btn-sm text-danger" data-original-title="Eliminar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

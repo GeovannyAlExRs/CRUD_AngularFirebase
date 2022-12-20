@@ -13,7 +13,7 @@ export class EmploymentListComponent implements OnInit{
   
   employments: any[] = [];
   loading = false;
-
+  age: any[] = [];
   constructor(private _employmentList: EmploymentService, 
               private toastr: ToastrService) {
     
@@ -22,7 +22,7 @@ export class EmploymentListComponent implements OnInit{
   ngOnInit(): void {
     this.getEmployments();
   }
-  
+
   getEmployments() {
     this.loading = true;
     
@@ -30,15 +30,24 @@ export class EmploymentListComponent implements OnInit{
       
       this.employments = [];
       this.loading = false;
-
+      
       data.forEach((element: any) => {
-        /*console.log(element.payload.doc.data());*/
-        this.employments.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        });
+        this.age = [];
+          this.employments.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          });
+          
+          this.employments.map(user => {
+            if(user.birthDate) {
+              const fecha = user.birthDate;
+              const convertAge = new Date(fecha);
+              const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+              this.age[element] = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+              console.log('EDAD DE ' + user.firstName + " es: " + this.age[element].toString())
+            }
+          });
       });
-      console.log(this.employments)
     });
   }
 
@@ -50,4 +59,5 @@ export class EmploymentListComponent implements OnInit{
       console.log(error);
     });
   }
+
 }
