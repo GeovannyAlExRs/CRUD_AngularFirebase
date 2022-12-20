@@ -28,7 +28,7 @@ export class EmploymentCreateComponent implements OnInit{
       birthDate: ['', Validators.required]
     })
     this.id = this.aRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
+    //console.log(this.id);
   }
 
   ngOnInit(): void {
@@ -58,9 +58,16 @@ export class EmploymentCreateComponent implements OnInit{
       phone: this.formEmployment.value.phone,
       birthDate: this.formEmployment.value.birthDate,
       dateRegister: new Date(),
-      dateUpdate: new Date()
+      dateUpdate: new Date(),
+      age: null
     }
 
+    /** [CALCULATE AGE] **/
+    const fecha = employment.birthDate;
+    const convertAge = new Date(fecha);
+    const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+    employment.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+    
     this.loading = true;
 
     this._employmentService.addEmployment(employment).then(()=> {
@@ -85,6 +92,12 @@ export class EmploymentCreateComponent implements OnInit{
       birthDate: this.formEmployment.value.birthDate,
       dateUpdate: new Date()
     }
+
+    /** [CALCULATE AGE] **/
+    const fecha = employment.birthDate;
+    const convertAge = new Date(fecha);
+    const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+    employment.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
 
     this.loading = true;
 

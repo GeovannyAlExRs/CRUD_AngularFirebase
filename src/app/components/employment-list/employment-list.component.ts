@@ -13,7 +13,7 @@ export class EmploymentListComponent implements OnInit{
   
   employments: any[] = [];
   loading = false;
-  age: any[] = [];
+  //age: any[] = [];
   constructor(private _employmentList: EmploymentService, 
               private toastr: ToastrService) {
     
@@ -32,13 +32,13 @@ export class EmploymentListComponent implements OnInit{
       this.loading = false;
       
       data.forEach((element: any) => {
-        this.age = [];
+        //this.age = [];
           this.employments.push({
             id: element.payload.doc.id,
             ...element.payload.doc.data()
           });
           
-          this.employments.map(user => {
+          /*this.employments.map(user => {
             if(user.birthDate) {
               const fecha = user.birthDate;
               const convertAge = new Date(fecha);
@@ -46,7 +46,7 @@ export class EmploymentListComponent implements OnInit{
               this.age[element] = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
               console.log('EDAD DE ' + user.firstName + " es: " + this.age[element].toString())
             }
-          });
+          });*/
       });
     });
   }
